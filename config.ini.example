@@ -1,0 +1,4 @@
+[DEFAULT]
+host:          <Host or subdomain. @ for base domain, test if domain is test.example.com>
+domain:        <Domain name>
+ddns_password: <dyndns password, NOT Namecheap account password>
