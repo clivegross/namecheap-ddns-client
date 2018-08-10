@@ -7,7 +7,7 @@ UPDATE_INTERVAL = 600
 public_ip = 'N/A'
 
 def get_public_ip():
-    return get('ifconfig.io', '/ip').read().decode().rstrip()
+    return get('checkip.amazonaws.com', '/').read().decode().rstrip()
 
 def update_succesfull(res):
     return res.status == 200 and '<ErrCount>0</ErrCount>' in res.read().decode()
