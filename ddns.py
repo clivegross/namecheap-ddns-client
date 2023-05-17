@@ -2,25 +2,31 @@ import sys
 import time
 from util import *
 import config
+from xml.etree import ElementTree
 
-UPDATE_INTERVAL = 600
+
 public_ip = 'N/A'
 
 def get_public_ip():
     return get('checkip.amazonaws.com', '/').read().decode().rstrip()
 
-def update_succesfull(res):
-    return res.status == 200 and '<ErrCount>0</ErrCount>' in res.read().decode()
+def update_successful(res):
+    response_string = res.read().decode().rstrip()
+    error_count = int(ElementTree.fromstring(response_string).find("ErrCount").text)
+    return res.status == 200 and error_count == 0
 
 def update_ddns():
+    # https://dynamicdns.park-your-domain.com/update?host=[host]&domain=[domain_name]&password=[ddns_password]&ip=[your_ip]
     params = [
-        '?host=' + config.read('host'),
-        '&domain=' + config.read('domain'),
-        '&password=' + config.read('ddns_password')
+        '?host=' + config.read('HOST'),
+        '&domain=' + config.read('DOMAIN'),
+        '&password=' + config.read('DDNS_PASSWORD'),
+        '&ip=' + get_public_ip()
     ]
-    res = get('dynamicdns.park-your-domain.com', '/update' + ''.join(params))
-    if update_succesfull(res):
-        print('Succesfully updated DNS.')
+    path = '/update' + ''.join(params)
+    res = get('dynamicdns.park-your-domain.com', path)
+    if update_successful(res):
+        print('Successfully updated DNS.')
         return True
     else:
         print('DNS update failed.', file=sys.stderr)
@@ -32,4 +38,4 @@ while True:
         print('Public IP Changed from ' + public_ip + ' to ' + current_ip + '.')
         if update_ddns():
             public_ip = current_ip
-    time.sleep(UPDATE_INTERVAL)
+    time.sleep(config.read('UPDATE_INTERVAL', int))
