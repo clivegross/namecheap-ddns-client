@@ -6,8 +6,6 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 def read(value, type=str):
-    for key in config['DEFAULT']:  
-        print(key)
     if type==str:
         return config['DEFAULT'][value.lower()]
     elif type==int:

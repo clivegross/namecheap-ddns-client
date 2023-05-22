@@ -27,7 +27,7 @@ def update_ddns():
     path = '/update' + ''.join(params)
     res = get('dynamicdns.park-your-domain.com', path)
     if update_successful(res):
-        print('Successfully updated DNS.', file=sys.stderr)
+        print('Successfully updated DNS IP address to ' + get_public_ip() + '.', file=sys.stderr)
         return True
     else:
         print('DNS update failed.', file=sys.stderr)
