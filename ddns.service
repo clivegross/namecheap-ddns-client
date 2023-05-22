@@ -1,0 +1,11 @@
+[Unit]
+Description=Python Dynamic DNS Updater
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /usr/local/bin/ddns/ddns.py
+WorkingDirectory=/usr/local/bin/ddns
+
+[Install]
+WantedBy=multi-user.target

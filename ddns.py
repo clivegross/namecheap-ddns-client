@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 import time
 from util import *
@@ -26,7 +27,7 @@ def update_ddns():
     path = '/update' + ''.join(params)
     res = get('dynamicdns.park-your-domain.com', path)
     if update_successful(res):
-        print('Successfully updated DNS.')
+        print('Successfully updated DNS.', file=sys.stderr)
         return True
     else:
         print('DNS update failed.', file=sys.stderr)

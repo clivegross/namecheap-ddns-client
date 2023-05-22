@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import http.client
 
 def get(url, path):
