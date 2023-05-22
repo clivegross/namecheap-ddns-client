@@ -18,8 +18,8 @@ The program checks the hosts public IP every 10 minutes (configurable in `config
 
 # Run as a service using systemctl
 
-1. Download this repo into `/usr/local/bin` (or wherever you like)
-1. Edit `ddns.service` if required.
+1. Download this repo into `/usr/local/bin/ddns` (or wherever you like)
+1. Edit `ddns.service` if required. Configured to run script from `/usr/local/bin/ddns`
 1. Copy the systemd unit file to systemd: `cp ddns.service /etc/systemd/system/`
 1. Then run it with:
 
