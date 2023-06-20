@@ -23,7 +23,7 @@ Configure your dynamic DNS settings in `config.ini`.
 
 This Python 3 script checks if the hosts public IP address has changed (using [checkip.amazonaws.com](https://checkip.amazonaws.com/)) and updates the dynamic DNS record on Namecheap if necessary.
 
-The program `ddns.py` runs forever and checks the hosts public IP address every 10 minutes (frequency configurable in `config.ini`). Start the program by executing:
+The program `ddns.py` runs forever and checks the hosts public IP address every 10 minutes (frequency configurable in `config.ini`), updating the Namecheap dynamic DNS record if thee is a change detected. Start the program by executing:
 
     python ddns.py
 
@@ -31,9 +31,9 @@ Or run as a service (see below).
 
 ## Update dynamic DNS record with private IP address
 
-An alternate Python 3 script can be used to check if the hosts private IP address (its primary local IP address) has changed instead. This can be useful in a private intranet where you do not have control of the DHCP server. Obtains the primary IP address of the host using [this socket solution by fatal_error on Stack Overflow](https://stackoverflow.com/a/28950776).
+An alternate Python 3 script, `ddns_private_ip.py` works the same as `ddns.py` but instead checks if the hosts private IP address (its primary local IP address) has changed, updating the Namecheap dynamic DNS record if a change is detected. This can be useful in a private intranet where you do not have control of the DHCP server. Obtains the primary IP address of the host using [this socket solution by fatal_error on Stack Overflow](https://stackoverflow.com/a/28950776).
 
-The program `ddns_private_ip.py` runs forever and checks the hosts primary private IP address every 10 minutes (frequency configurable in `config.ini`). Start the program by executing:
+Start the program by executing:
 
     python ddns_private_ip.py
 
