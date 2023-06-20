@@ -1,5 +1,4 @@
-Namecheap Dynamic DNS updater
------------------------------
+# Namecheap Dynamic DNS updater
 
 ## Description
 
